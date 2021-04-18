@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-	entry: './src/index.ts',
+	entry: './src/index.tsx',
 	output: {
 		filename: '[name].[contenthash].js',
 		path: path.join(__dirname, 'dist'),
