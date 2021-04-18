@@ -1,0 +1,23 @@
+# directory
+node_modules
+dist/
+
+# yarn
+*.log
+yarn.lock
+
+# env
+*.env
+
+.npm
+.eslintcache
+
+# vs
+.vscode/
+*.iml
+*.ipr
+*.iws
+.idea/
+
+
+
