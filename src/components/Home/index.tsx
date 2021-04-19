@@ -5,19 +5,19 @@ import { getAllposts } from '@/utils/apiRequests'
 
 // material
 import List from '@material-ui/core/List'
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { setPosts } from '@/redux/postReducer'
+import { setPosts } from '@/redux/reducers/postListReducer'
 
 // components
 import Loader from '@/components/Loader'
 import PostCard from './postCard'
 // ------------------
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		list: {
 			paddingBottom: '5rem',

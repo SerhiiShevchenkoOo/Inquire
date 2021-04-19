@@ -1,7 +1,7 @@
 import React from 'react'
 
 // matirial
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
 
@@ -15,7 +15,7 @@ import { createPost } from '@/utils/apiRequests'
 // castomHooks
 import { useFormState } from 'react-use-form-state'
 //-------------------------------------
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			zIndex: 1,
@@ -71,7 +71,7 @@ const Footer = ({ isOpen, setIsOpen }: openForm): JSX.Element => {
 	const [formState, { text, textarea, label }] = useFormState()
 	const dispatch = useDispatch()
 
-	const handlerSubmit = async (e: any) => {
+	const handlerSubmit = async (e: React.SyntheticEvent) => {
 		e.preventDefault()
 		try {
 			const result = await createPost(
@@ -86,7 +86,7 @@ const Footer = ({ isOpen, setIsOpen }: openForm): JSX.Element => {
 				}),
 			)
 		} catch (err) {
-			console.log(err)
+			throw new Error(err)
 		}
 		setIsOpen(false)
 	}

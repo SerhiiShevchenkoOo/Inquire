@@ -1,7 +1,7 @@
 import React from 'react'
 
 // matirial
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete'
 import SendIcon from '@material-ui/icons/Send'
@@ -14,10 +14,10 @@ import { delatePost } from '@/utils/apiRequests'
 
 // redux
 import { useDispatch } from 'react-redux'
-import { delelePost } from '@/redux/postReducer'
+import { delelePost } from '@/redux/reducers/postListReducer'
 // --------------------------------------------------
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			display: 'flex',
@@ -46,7 +46,7 @@ const PostBottomContent = ({ elem }: StandardComponentProps): JSX.Element => {
 	return (
 		<div className={classes.root}>
 			<Link
-				to={`/post:${elem.id}`}
+				to={`/post/${elem.id}`}
 				style={{
 					textDecoration: 'none',
 				}}>

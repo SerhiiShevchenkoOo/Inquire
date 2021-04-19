@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // matirial
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -17,7 +17,7 @@ import { useLocation } from 'react-router-dom'
 import CreatePostForm from './CreatePostForm'
 //---------------------------------
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		appBar: {
 			width: '100%',

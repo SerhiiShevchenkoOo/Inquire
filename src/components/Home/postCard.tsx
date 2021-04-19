@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 
 // components
 import PostBottomContent from './PostBottomContent'
@@ -64,7 +63,7 @@ const PostCard = ({ elem }: StandardComponentProps): JSX.Element => {
 								variant='body2'
 								className={classes.text}
 								color='textSecondary'>
-								{elem.body}
+								{elem.body.slice(0, 200)}...
 							</Typography>
 						</React.Fragment>
 					}
