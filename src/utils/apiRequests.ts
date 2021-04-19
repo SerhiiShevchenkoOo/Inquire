@@ -22,7 +22,10 @@ export const getPost = async (id: string): Promise<AxiosResponse> => {
 	}
 }
 
-export const createPost = async (title: string, body: string) => {
+export const createPost = async (
+	title: string,
+	body: string,
+): Promise<AxiosResponse> => {
 	const url = `${API_URl}/posts`
 	try {
 		const result = await axios.post(url, { title, body })
@@ -56,16 +59,25 @@ export const delatePost = async (id: number): Promise<void> => {
 }
 
 export const createComment = async (
-	id: number,
+	id: number | string,
 	body: string,
 ): Promise<AxiosResponse> => {
 	const url = `${API_URl}/comments/`
 	try {
 		const data = await axios.post(url, {
-			createPost: id,
+			postId: id,
 			body,
 		})
 		return data
+	} catch (err) {
+		throw new Error(err)
+	}
+}
+export const getAllCommets = async (): Promise<AxiosResponse> => {
+	const url = `${API_URl}/comments`
+	try {
+		const posts = await axios.get(url)
+		return posts
 	} catch (err) {
 		throw new Error(err)
 	}
