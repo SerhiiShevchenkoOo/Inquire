@@ -6,7 +6,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
 
 // redux
-import { postAdded } from '@/redux/postReducer'
+import { postAdded } from '@/redux/reducers/postListReducer'
 import { useDispatch } from 'react-redux'
 
 // apiRequests
@@ -74,11 +74,15 @@ const Footer = ({ isOpen, setIsOpen }: openForm): JSX.Element => {
 	const handlerSubmit = async (e: any) => {
 		e.preventDefault()
 		try {
-			await createPost(formState.values.title, formState.values.body)
+			const result = await createPost(
+				formState.values.title,
+				formState.values.body,
+			)
 			dispatch(
 				postAdded({
 					title: formState.values.title,
 					body: formState.values.body,
+					id: result.data.id,
 				}),
 			)
 		} catch (err) {
