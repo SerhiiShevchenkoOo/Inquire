@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 
 // redux
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { setComments } from '@/redux/reducers/commentsReducer'
 
@@ -22,6 +22,9 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Avatar from '@material-ui/core/Avatar'
 
+// hooks
+import useDataApi from '@/utils/useDataApi'
+
 // components
 import Loader from '@/components/Loader'
 import CommentAddForm from './CommentAddForm'
@@ -41,25 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Comment = (): JSX.Element => {
 	const classes = useStyles()
-
 	const comments = useSelector((state: RootState) => state.comments)
-	const dispatch = useDispatch()
-	const [isLoading, setIsLoading] = useState(false)
-
-	useEffect(() => {
-		const getPostsFromApi = async () => {
-			setIsLoading(true)
-			try {
-				const result = await getAllCommets()
-				dispatch(setComments(result.data))
-				setIsLoading(false)
-			} catch (err) {
-				setIsLoading(false)
-				throw new Error(err)
-			}
-		}
-		getPostsFromApi()
-	}, [dispatch])
+	const [{ isLoading }] = useDataApi(getAllCommets, [], setComments)
 
 	if (isLoading) {
 		return <Loader />

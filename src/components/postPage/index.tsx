@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 
 // material
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography'
 
 // react-router
 import { useParams } from 'react-router-dom'
+
+// hooks
+import dataFetchReducer from '@/utils/dataFetchReducer'
 
 // api
 import { getPost } from '@/utils/apiRequests'
@@ -45,29 +48,28 @@ const PagePost = (): JSX.Element => {
 	const { id }: { id: string } = useParams()
 	const post = useSelector((state: RootState) => state.postPage)
 	const dispatch = useDispatch()
-	const [isLoading, setIsLoading] = useState(false)
-	const [error, setError] = useState(false)
-
+	const [loading, dispatchLoadding] = useReducer(dataFetchReducer, {
+		isLoading: false,
+		isError: false,
+	})
+	const { isLoading, isError } = loading
 	const classes = useStyles()
 
 	useEffect(() => {
 		const getPostsFromApi = async () => {
-			setIsLoading(true)
+			dispatchLoadding({ type: 'FETCH_INIT' })
 			try {
 				const result = await getPost(id)
-				dispatch(
-					setPost({ title: result.data.title, body: result.data.body, id }),
-				)
-				setIsLoading(false)
+				dispatch(setPost({ ...result.data, id }))
+				dispatchLoadding({ type: 'FETCH_SUCCESS' })
 			} catch (err) {
-				setError(err)
-				setIsLoading(false)
+				dispatchLoadding({ type: 'FETCH_FAILURE' })
 			}
 		}
 		getPostsFromApi()
 	}, [dispatch, id])
 
-	if (error) {
+	if (isError) {
 		return <p>error</p>
 	}
 	if (isLoading) {
