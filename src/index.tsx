@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 
 // router
@@ -7,9 +7,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 // material
 import { ThemeProvider as MatirialProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { rootStyle } from '@/style'
 
 // style
+import { rootStyle } from '@/style'
+import '@/style/index.css' // eslint-disable-line  import/extensions
 import 'normalize.css'
 
 // redax
@@ -21,15 +22,13 @@ import App from './App'
 //-------------------------------
 
 render(
-	<StrictMode>
-		<CssBaseline />
-		<Provider store={store}>
-			<MatirialProvider theme={rootStyle}>
-				<Router>
-					<App />
-				</Router>
-			</MatirialProvider>
-		</Provider>
-	</StrictMode>,
+	<Provider store={store}>
+		<MatirialProvider theme={rootStyle}>
+			<CssBaseline />
+			<Router>
+				<App />
+			</Router>
+		</MatirialProvider>
+	</Provider>,
 	document.getElementById('root'),
 )
