@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add'
 import HomeIcon from '@material-ui/icons/Home'
 
 // router
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 // components
 import CreatePostForm from './CreatePostForm'
@@ -51,9 +51,11 @@ const Footer = (): JSX.Element => {
 		<>
 			<AppBar position='fixed' color='primary' className={classes.appBar}>
 				<Toolbar>
-					<IconButton edge='start' color='inherit' aria-label='open drawer'>
-						<HomeIcon />
-					</IconButton>
+					<Link to='/' style={{ textDecoration: 'none' }}>
+						<IconButton edge='start' color='inherit' aria-label='open drawer'>
+							<HomeIcon />
+						</IconButton>
+					</Link>
 					{isHome && (
 						<Fab
 							onClick={() => setIsOpen(!isOpen)}
