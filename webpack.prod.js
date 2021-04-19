@@ -9,6 +9,7 @@ module.exports = merge(common, {
 	mode: 'production',
 	devtool: 'source-map',
 	optimization: {
+		concatenateModules: false,
 		moduleIds: 'deterministic',
 		minimize: true,
 		mangleWasmImports: true,
@@ -44,6 +45,7 @@ module.exports = merge(common, {
 		minimizer: [
 			new TerserPlugin({
 				extractComments: true,
+				parallel: true,
 			}),
 			new CssMinimizerPlugin({
 				parallel: true,
@@ -59,6 +61,12 @@ module.exports = merge(common, {
 		],
 	},
 	plugins: [
+		new ImageMinimizerPlugin({
+			test: /\.(png|jpe?g|gif)$/,
+			minimizerOptions: {
+				plugins: ['pngquant'],
+			},
+		}),
 		new ImageMinimizerPlugin({
 			test: /\.(png|jpe?g|gif)$/,
 			severityError: 'warning', // Ignore errors on corrupted images
