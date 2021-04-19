@@ -1,7 +1,5 @@
 # Inquire test-task
 
-# Inquire test-task
-
 ## Creators
 
 - [Sergey Shevchenko](https://github.com/SerhiiShevchenkoOo)
