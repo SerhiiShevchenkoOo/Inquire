@@ -11,16 +11,22 @@ export const getAllposts = async (): Promise<AxiosResponse> => {
 	} catch (err) {
 		throw new Error(err)
 	}
-	//	return posts.data
+}
+export const getPost = async (id: string): Promise<AxiosResponse> => {
+	const url = `${API_URl}/posts/${id}`
+	try {
+		const posts = await axios.get(url)
+		return posts
+	} catch (err) {
+		throw new Error(err)
+	}
 }
 
-export const createPost = async (
-	title: string,
-	body: string,
-): Promise<void> => {
+export const createPost = async (title: string, body: string) => {
 	const url = `${API_URl}/posts`
 	try {
-		await axios.post(url, { title, body })
+		const result = await axios.post(url, { title, body })
+		return result
 	} catch (err) {
 		throw new Error(err)
 	}
@@ -28,11 +34,11 @@ export const createPost = async (
 export const updatePost = async (
 	title: string,
 	body: string,
-	id: number,
+	id: string | number,
 ): Promise<void> => {
 	const url = `${API_URl}/posts/${id}`
 	try {
-		await axios.post(url, {
+		await axios.put(url, {
 			title,
 			body,
 		})
