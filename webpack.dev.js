@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common.js')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = merge(common, {
 	mode: 'development',
@@ -17,7 +18,7 @@ module.exports = merge(common, {
 		new ForkTsCheckerWebpackPlugin({ async: false }),
 		new webpack.HotModuleReplacementPlugin(),
 		new ESLintPlugin({
-			extensions: ['.js', 'jsx'],
+			extensions: ['.ts', '.tsx'],
 		}),
 	],
 	module: {
